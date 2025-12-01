@@ -2,8 +2,8 @@
 
 use bevy::prelude::*;
 
-use crate::{
-    asset_tracking::LoadResource,
+use crate::app::{
+    asset::LoadResource,
     audio::music,
     demo::player::{PlayerAssets, player},
     screens::Screen,

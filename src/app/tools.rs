@@ -1,10 +1,12 @@
 //! Development tools for the game. This plugin is only enabled in dev builds.
 
 use bevy::{
-    dev_tools::states::log_transitions, input::common_conditions::input_just_pressed, prelude::*,
+    prelude::*,
+    dev_tools::states::log_transitions,
+    input::common_conditions::input_just_pressed,
 };
 
-use crate::screens::Screen;
+use crate::app::screens::Screen;
 
 pub(super) fn plugin(app: &mut App) {
     // Log `Screen` state transitions.

@@ -13,9 +13,15 @@
 //! purposes. If you want to move the player in a smoother way,
 //! consider using a [fixed timestep](https://github.com/bevyengine/bevy/blob/main/examples/movement/physics_in_fixed_timestep.rs).
 
-use bevy::{prelude::*, window::PrimaryWindow};
+use bevy::{
+    prelude::*,
+    window::PrimaryWindow,
+};
 
-use crate::{AppSystems, PausableSystems};
+use crate::app::{
+    AppSystems,
+    PausableSystems
+};
 
 pub(super) fn plugin(app: &mut App) {
     app.add_systems(

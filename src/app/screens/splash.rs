@@ -1,12 +1,16 @@
 //! A splash screen that plays briefly at startup.
 
 use bevy::{
+    prelude::*,
     image::{ImageLoaderSettings, ImageSampler},
     input::common_conditions::input_just_pressed,
-    prelude::*,
 };
 
-use crate::{AppSystems, screens::Screen, theme::prelude::*};
+use crate::app::{
+    AppSystems,
+    screens::Screen,
+    theme::prelude::*
+};
 
 pub(super) fn plugin(app: &mut App) {
     // Spawn splash screen.

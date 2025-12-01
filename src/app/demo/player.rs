@@ -5,9 +5,9 @@ use bevy::{
     prelude::*,
 };
 
-use crate::{
+use crate::app::{
     AppSystems, PausableSystems,
-    asset_tracking::LoadResource,
+    asset::LoadResource,
     demo::{
         animation::PlayerAnimation,
         movement::{MovementController, ScreenWrap},
