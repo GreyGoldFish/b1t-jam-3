@@ -1,0 +1,22 @@
+use bevy::prelude::*;
+use bevy_enhanced_input::prelude::*;
+
+#[derive(InputAction)]
+#[action_output(Vec2)]
+pub struct WalkAction;
+
+#[derive(InputAction)]
+#[action_output(bool)]
+pub struct JumpAction;
+
+#[derive(InputAction)]
+#[action_output(Vec2)]
+pub struct RotationAction;
+
+#[derive(InputAction)]
+#[action_output(bool)]
+pub struct CaptureCursor;
+
+#[derive(InputAction)]
+#[action_output(bool)]
+pub struct ReleaseCursor;

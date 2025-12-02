@@ -4,7 +4,7 @@ use bevy::{input::common_conditions::input_just_pressed, prelude::*};
 
 use crate::app::{
     Pause,
-    demo::level::spawn_level,
+    world::spawn_level,
     menus::Menu,
     screens::Screen
 };

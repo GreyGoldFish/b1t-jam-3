@@ -5,12 +5,15 @@
 
 mod asset;
 mod audio;
-mod demo;
+mod input;
 #[cfg(feature = "dev")]
 mod tools;
 mod menus;
 mod screens;
 mod theme;
+mod character;
+mod world;
+mod camera;
 
 use bevy::{
     prelude::*,
@@ -46,12 +49,15 @@ impl Plugin for AppPlugin {
         app.add_plugins((
             asset::plugin,
             audio::plugin,
-            demo::plugin,
             #[cfg(feature = "dev")]
             tools::plugin,
             menus::plugin,
             screens::plugin,
             theme::plugin,
+            character::plugin,
+            input::plugin,
+            world::plugin,
+            camera::plugin,
         ));
 
         // Order new `AppSystems` variants by adding them here:
@@ -68,9 +74,6 @@ impl Plugin for AppPlugin {
         // Set up the `Pause` state.
         app.init_state::<Pause>();
         app.configure_sets(Update, PausableSystems.run_if(in_state(Pause(false))));
-
-        // Spawn the main camera.
-        app.add_systems(Startup, spawn_camera);
     }
 }
 
@@ -94,7 +97,3 @@ struct Pause(pub bool);
 /// A system set for systems that shouldn't run while the game is paused.
 #[derive(SystemSet, Copy, Clone, Eq, PartialEq, Hash, Debug)]
 struct PausableSystems;
-
-fn spawn_camera(mut commands: Commands) {
-    commands.spawn((Name::new("Camera"), Camera2d));
-}
