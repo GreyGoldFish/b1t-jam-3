@@ -7,6 +7,7 @@ pub(crate) struct InputSettings {
     pub right: [Binding; 2],
     pub backward: [Binding; 2],
     pub left: [Binding; 2],
+    pub up: [Binding; 2],
 }
 
 impl Default for InputSettings {
@@ -16,6 +17,7 @@ impl Default for InputSettings {
             right: [Binding::from(KeyCode::KeyD), Binding::None],
             backward: [Binding::from(KeyCode::KeyS), Binding::None],
             left: [Binding::from(KeyCode::KeyA), Binding::None],
+            up: [Binding::from(KeyCode::Space), Binding::None],
         }
     }
 }

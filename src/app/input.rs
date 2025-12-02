@@ -9,6 +9,7 @@ pub mod settings;
 
 use actions::{
     WalkAction,
+    JumpAction,
     RotationAction,
     CaptureCursor,
     ReleaseCursor,
@@ -16,14 +17,14 @@ use actions::{
 
 use settings::InputSettings;
 
-use crate::app::character::ControlledByPlayer;
+use crate::app::character::PlayerControlled;
 
 pub(super) fn plugin(app: &mut App) {
     app
         .init_resource::<InputSettings>()
         .add_systems(Startup, setup)
         .add_plugins(EnhancedInputPlugin)
-        .add_input_context::<ControlledByPlayer>()
+        .add_input_context::<PlayerControlled>()
         .add_observer(apply_player_actions)
             .add_observer(on_capture_cursor_completed)
             .add_observer(on_release_cursor_completed);
@@ -36,7 +37,7 @@ fn setup(
 }
 
 fn apply_player_actions(
-    controlled_by_player: On<Add, ControlledByPlayer>,
+    controlled_by_player: On<Add, PlayerControlled>,
     settings: Res<InputSettings>,
     mut commands: Commands,
 ) {
@@ -64,6 +65,14 @@ fn apply_player_actions(
         ))
     );
 
+    let jump_action = (
+        Action::<JumpAction>::new(),
+        Bindings::spawn((
+            Spawn((settings.up[0],)),
+            Spawn((settings.up[1],)),
+        ))
+    );
+
     let rotation_action = (
         Action::<RotationAction>::new(),
         Bindings::spawn((
@@ -79,9 +88,10 @@ fn apply_player_actions(
         ))
     );
 
-    commands.entity(player).insert(actions!(ControlledByPlayer[
+    commands.entity(player).insert(actions!(PlayerControlled[
         move_action,
         rotation_action,
+        jump_action,
     ]));
 }
 

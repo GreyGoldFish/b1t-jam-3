@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use avian3d::{math::*, prelude::*};
 
-use crate::app::character::{ControlledByPlayer, controller::CharacterControllerBundle};
+use crate::app::character::{PlayerControlled, controller::CharacterControllerBundle};
 
 pub(super) fn plugin(app: &mut App) {
 
@@ -50,9 +50,9 @@ pub fn spawn_level(
 pub fn spawn_player(mut commands: Commands) {
     commands.spawn((
         Name::new("Player"),
-        ControlledByPlayer,
+        PlayerControlled,
         Transform::from_xyz(0.0, 1.5, 0.0),
         CharacterControllerBundle::new(Collider::capsule(0.4, 1.0), Vector::NEG_Y * 9.81 * 2.0)
-            .with_movement(30.0, 0.92, 7.0, (30.0 as Scalar).to_radians()),
+            .with_movement(120.0, 0.92, 7.0, (30.0 as Scalar).to_radians()),
     ));
 }

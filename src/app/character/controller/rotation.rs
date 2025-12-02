@@ -19,15 +19,10 @@ fn apply_rotation_action(
     }
 
     let mut transform = transforms.get_mut(rotate_event.context).unwrap();
-    let (mut yaw, mut pitch, _) = transform.rotation.to_euler(EulerRot::YXZ);
+    let (mut yaw, _, _) = transform.rotation.to_euler(EulerRot::YXZ);
 
     yaw += rotate_event.value.x.to_radians();
-    pitch += rotate_event.value.y.to_radians();
 
-    transform.rotation = Quat::from_euler(
-        EulerRot::YXZ,
-        yaw,
-        pitch.clamp(-1.54, 1.54),
-        0.0
-    );
+    // Only apply yaw rotation (Y axis)
+    transform.rotation = Quat::from_rotation_y(yaw);
 }
